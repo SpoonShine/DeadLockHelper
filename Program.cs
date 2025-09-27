@@ -42,10 +42,14 @@ namespace DeadLockHelper
                         {
                             remainingTime -= TimeForOneBullet * Ammo;
                             BulletsToShoot += Ammo;
-                            if ((remainingTime - ReloadTime) >= 0)
+                            if ((remainingTime - ReloadTime) > 0)
                             {
                                 remainingTime -= ReloadTime;
-                                BulletsToShoot += Math.Floor(remainingTime / TimeForOneBullet);
+                                //&& Math.Floor(remainingTime / TimeForOneBullet) > 0 - прототип, доделать
+                                if (Math.Floor(remainingTime / TimeForOneBullet) >= 1 && Math.Floor(remainingTime / TimeForOneBullet) > 0)
+                                {
+                                    BulletsToShoot += Math.Floor(remainingTime / TimeForOneBullet);
+                                }
                             }
                             dps += BulletsToShoot * Damage;
                         }
